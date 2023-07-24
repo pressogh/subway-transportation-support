@@ -7,16 +7,19 @@
 	"htmlWhitespaceSensitivity": "css",
 	"insertPragma": false,
 	"jsxSingleQuote": false,
+	"jsxBracketSameLine": true,
+	"jsxBracketSpacing": true,
 	"printWidth": 80,
 	"proseWrap": "preserve",
 	"quoteProps": "as-needed",
 	"requirePragma": false,
-	"semi": true,
+	"semi": false,
 
 	"singleQuote": true,
 	"tabWidth": 4,
 	"trailingComma": "none",
 	"useTabs": true,
 	"vueIndentScriptAndStyle": false,
-	"disableLanguages": []
+	"disableLanguages": [],
+	"plugins": ["prettier-plugin-tailwindcss"]
 }
