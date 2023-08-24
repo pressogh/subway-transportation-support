@@ -13,7 +13,7 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
-    "next": "canary",
+    "next": "^13.4.20-canary.4",
     "next-pwa": "^5.6.0",
     "postcss": "8.4.27",
     "react": "18.2.0",
