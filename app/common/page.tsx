@@ -1,5 +1,6 @@
 import Map from '@/app/components/Map';
 import LineTagGrid from '@/app/components/Subway/LineTagGrid';
+import NearSubwayStation from '@/app/components/Subway/NearSubwayStation';
 
 const Page = () => {
 	return (
@@ -24,7 +25,19 @@ const Page = () => {
 			</div>
 
 			<div>
-				<LineTagGrid lineInfos={[{ line: '인', color: '#759CCE' }]} />
+				<LineTagGrid
+					lineInfos={[
+						{ line: '인', color: '#759CCE' },
+						{ line: '인', color: '#F5A251' },
+					]}
+				/>
+
+				<NearSubwayStation
+					lineInfo={{ line: '인', color: '#759CCE' }}
+					main={'인천대입구'}
+					prev={'지식정보단지'}
+					next={'센트럴파크'}
+				/>
 			</div>
 		</div>
 	);

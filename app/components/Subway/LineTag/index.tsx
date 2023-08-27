@@ -7,7 +7,7 @@ interface LineTagProps {
 const LineTag = ({ lineInfo }: LineTagProps) => {
 	return (
 		<div
-			className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100`}
+			className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-gray-100`}
 		>
 			<div
 				className={`flex h-6 w-6 items-center justify-center rounded-full text-sm font-light text-white`}

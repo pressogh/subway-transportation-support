@@ -7,7 +7,7 @@ interface TagGridProps {
 
 const LineTagGrid = ({ lineInfos }: TagGridProps) => {
 	return (
-		<div className={`flex flex-row gap-2`}>
+		<div className={`flex flex-row gap-3`}>
 			{lineInfos.map((lineInfo, index) => {
 				return (
 					<LineTag lineInfo={lineInfo} key={lineInfo.line + index} />
