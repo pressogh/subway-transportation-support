@@ -25,7 +25,11 @@ module.exports = {
 				'sans-serif',
 			],
 		},
-		extend: {},
+		extend: {
+			colors: {
+				'incheon-1': '#759CCE',
+			},
+		},
 	},
 	plugins: [],
 };

@@ -3,32 +3,38 @@
 import Script from 'next/script';
 import { useEffect, useRef, useState } from 'react';
 import TrackingButton from '@/app/components/Map/TrackingButton';
+import useGeolocation from '@/@hooks/useGeolocation';
+import useInterval from '@/@hooks/useInterval';
 
-interface MapProps {
-	coor: GeolocationCoordinates | null;
-}
+const Index = () => {
+	const coor = useGeolocation();
 
-const Index = ({ coor }: MapProps) => {
 	const mapDivRef = useRef<HTMLDivElement>(null);
 	const map = useRef<naver.maps.Map | null>(null);
 	const marker = useRef<naver.maps.Marker | null>(null);
 
-	const [track, setTrack] = useState<boolean>(false);
+	const [track, setTrack] = useState<boolean>(true);
 	const [scriptLoaded, setScriptLoaded] = useState<boolean>(false);
 
 	// 지도 생성
 	useEffect(() => {
-		if (scriptLoaded) {
-			map.current = new window.naver.maps.Map(mapDivRef.current || '', {
-				center: new window.naver.maps.LatLng(
-					coor?.latitude || 37.555167,
-					coor?.longitude || 126.970833,
-				),
-				zoom: 16,
+		if (scriptLoaded && mapDivRef.current) {
+			map.current = new window.naver.maps.Map(mapDivRef.current, {
 				scaleControl: false,
 			});
+			const dragStartListener = map.current?.addListener(
+				'dragstart',
+				() => {
+					setTrack(false);
+				},
+			);
+
+			// 컴포넌트 언마운트 시 이벤트 리스너 제거
+			return () => {
+				map.current?.removeListener(dragStartListener);
+			};
 		}
-	}, [scriptLoaded, coor]);
+	}, [scriptLoaded]);
 
 	// 지도의 중심을 현재 위치로 변경
 	useEffect(() => {
@@ -36,23 +42,22 @@ const Index = ({ coor }: MapProps) => {
 			return;
 		}
 
-		map.current?.setCenter(
-			new window.naver.maps.LatLng(
-				coor?.latitude || 37.555167,
-				coor?.longitude || 126.970833,
-			),
+		map.current?.panTo(
+			marker.current?.getPosition() ||
+				new window.naver.maps.LatLng(
+					coor?.latitude || 37.555167,
+					coor?.longitude || 126.970833,
+				),
 		);
 	}, [coor, track]);
 
 	// 마커 생성
 	useEffect(() => {
-		if (!track || !map.current) {
-			marker.current?.setMap(null);
+		if (!map.current || !track) {
 			return;
 		}
 
 		if (marker.current !== null) {
-			map.current?.setZoom(16);
 			marker.current?.setPosition(
 				new window.naver.maps.LatLng(
 					coor?.latitude || 37.555167,
@@ -81,7 +86,7 @@ const Index = ({ coor }: MapProps) => {
 				},
 			});
 		}
-	}, [track, coor]);
+	}, [coor, track]);
 
 	return (
 		<div className={`relative h-full w-full`}>
