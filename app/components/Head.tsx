@@ -61,6 +61,12 @@ const Head = () => {
 				href='/app-icons/icon-512x512.png'
 			/>
 			<meta name='msapplication-TileColor' content='#FF98BA' />
+			<meta
+				name={'viewport'}
+				content={
+					'width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0'
+				}
+			/>
 		</head>
 	);
 };

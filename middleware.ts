@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
 
 	if (pathname === '/login') {
 		if (accessToken || refreshToken) {
-			return NextResponse.redirect(new URL('/', request.nextUrl));
+			return NextResponse.redirect(new URL('/common', request.nextUrl));
 		}
 
 		return NextResponse.next();
@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
 	const authorized = await fetch(
 		`${process.env.NEXT_PUBLIC_API_URL}/auth/check`,
 		{
-			method: 'GET',
+			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${
 					cookies().has('accessToken') && accessToken !== undefined
@@ -74,6 +74,8 @@ export async function middleware(request: NextRequest) {
 		res.cookies.set('accessToken', accessToken, {
 			httpOnly: true,
 			maxAge: 7200 * 1000,
+			secure: true,
+			sameSite: 'lax',
 		});
 
 		return res;

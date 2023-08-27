@@ -15,7 +15,7 @@ export default function RootLayout({
 	return (
 		<html lang='ko'>
 			<Head />
-			<body>{children}</body>
+			<body className={`px-5 py-6`}>{children}</body>
 		</html>
 	);
 }

@@ -1,5 +1,18 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+	async rewrites() {
+		return [
+			{
+				source: '/',
+				destination: '/common',
+			},
+			{
+				source: '/:path*',
+				destination: '/common/:path*',
+			},
+		];
+	},
+};
 
 const prod = process.env.NODE_ENV === 'production';
 

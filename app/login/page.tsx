@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Page = () => {
 	return (
 		<div
-			className={`flex h-screen w-full flex-col items-center justify-between px-12 pb-12 pt-20`}
+			className={`flex h-[calc(100dvh-3rem)] w-full flex-col items-center justify-between pb-10`}
 		>
 			<div className={`relative aspect-square w-[80%]`}>
 				<Image
