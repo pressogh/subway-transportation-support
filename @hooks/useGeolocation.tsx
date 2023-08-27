@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useInterval from '@/@hooks/useInterval';
 
 const useGeolocation = () => {
 	const [location, setLocation] = useState<GeolocationCoordinates | null>(
@@ -15,14 +16,13 @@ const useGeolocation = () => {
 		console.log(error);
 	};
 
-	useEffect(() => {
+	useInterval(() => {
 		if (!navigator.geolocation) {
 			console.log('Geolocation is not supported');
 		} else {
-			// TODO : 사파리에서는 SSL이 적용되어 있어야 사용 가능
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 		}
-	}, []);
+	}, 1000);
 
 	return location;
 };
