@@ -5,12 +5,27 @@ import { Feature } from '@/@types/TMapType';
 import { NearStationType } from '@/@types/NearStationType';
 
 const useNearStation = () => {
-	const nowCoor = useGeolocation();
-	const [res, setRes] = useState<NearStationType>();
+	const [nowCoor, setNowCoor] = useState<GeolocationCoordinates | null>(null);
+	const geolocation = useGeolocation();
+	const [res, setRes] = useState<NearStationType | null>(null);
 
 	useEffect(() => {
-		if (nowCoor) {
-			let nearStation: NearStationType;
+		if (nowCoor === null && geolocation !== null) setNowCoor(geolocation);
+		else if (nowCoor !== null && geolocation !== null) {
+			// 현재 위치가 이전 위치와 100m 이상 차이가 날 경우에만 업데이트
+			if (
+				Math.sqrt(
+					Math.pow(nowCoor.latitude - geolocation.latitude, 2) +
+						Math.pow(nowCoor.longitude - geolocation.longitude, 2),
+				) >= 0.0009
+			)
+				setNowCoor(geolocation);
+		}
+	}, [geolocation]);
+
+	useEffect(() => {
+		if (nowCoor !== null) {
+			let nearStation: NearStationType | null = null;
 
 			const fetchStation = stationInfo.data.map(async (station: any) => {
 				const requestBody = {
@@ -37,8 +52,7 @@ const useNearStation = () => {
 					},
 				).then((res) => res.json());
 
-				console.log(JSON.stringify(f));
-				if (nearStation === undefined) {
+				if (nearStation === null) {
 					nearStation = {
 						stationInfo: station,
 						totalDistance: f.features[0].properties.totalDistance,
