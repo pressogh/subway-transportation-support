@@ -22,7 +22,7 @@ const useGeolocation = () => {
 		} else {
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 		}
-	}, 10000000);
+	}, 5000);
 
 	return location;
 };

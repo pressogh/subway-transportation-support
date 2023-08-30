@@ -1,21 +1,8 @@
 import useGeolocation from '@/@hooks/useGeolocation';
 import stationInfo from '@/@etc/stationInfo.json';
 import { useEffect, useState } from 'react';
-import Point = naver.maps.Point;
 import { Feature } from '@/@types/TMapType';
-
-interface NearStationType {
-	totalDistance: number;
-	start: {
-		lat: number;
-		lng: number;
-	};
-	end: {
-		lat: number;
-		lng: number;
-	};
-	route: Point[];
-}
+import { NearStationType } from '@/@types/NearStationType';
 
 const useNearStation = () => {
 	const nowCoor = useGeolocation();
@@ -53,6 +40,7 @@ const useNearStation = () => {
 				console.log(JSON.stringify(f));
 				if (nearStation === undefined) {
 					nearStation = {
+						stationInfo: station,
 						totalDistance: f.features[0].properties.totalDistance,
 						start: {
 							lat: f.features[0].geometry.coordinates[0][0],
@@ -81,6 +69,7 @@ const useNearStation = () => {
 						f.features[0].properties.totalDistance
 					) {
 						nearStation = {
+							stationInfo: station,
 							totalDistance:
 								f.features[0].properties.totalDistance,
 							start: {

@@ -2,7 +2,14 @@
 	"data": [
 		{
 			"station": "인천대입구역",
-			"line": ["인천 1호선"],
+			"prevStation": "지식정보단지",
+			"nextStation": "센트럴파크",
+			"line": [
+				{
+					"text": "인",
+					"color": "#759CCE"
+				}
+			],
 			"lat": 37.386007,
 			"lng": 126.639484
 		}

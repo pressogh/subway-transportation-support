@@ -13,19 +13,9 @@ const Page = () => {
 			<AvailableStation station={'인천대입구'} />
 
 			<div>
-				<LineTagGrid
-					lineInfos={[
-						{ line: '인', color: '#759CCE' },
-						{ line: '인', color: '#F5A251' },
-					]}
-				/>
+				<LineTagGrid />
 
-				<NearSubwayStation
-					lineInfo={{ line: '인', color: '#759CCE' }}
-					main={'인천대입구'}
-					prev={'지식정보단지'}
-					next={'센트럴파크'}
-				/>
+				<NearSubwayStation />
 			</div>
 		</div>
 	);

@@ -1,16 +1,16 @@
-import { LineInfoType } from '@/@types/LineInfoType';
+'use client';
+
+import useNearStation from '@/@hooks/useNearStation';
 import LineTag from '@/app/components/Subway/LineTag';
 
-interface TagGridProps {
-	lineInfos: LineInfoType[];
-}
+const LineTagGrid = () => {
+	const nearStation = useNearStation();
 
-const LineTagGrid = ({ lineInfos }: TagGridProps) => {
 	return (
 		<div className={`flex flex-row gap-3`}>
-			{lineInfos.map((lineInfo, index) => {
+			{nearStation?.stationInfo.line.map((lineInfo, index) => {
 				return (
-					<LineTag lineInfo={lineInfo} key={lineInfo.line + index} />
+					<LineTag lineInfo={lineInfo} key={lineInfo.text + index} />
 				);
 			})}
 		</div>

@@ -1,4 +1,4 @@
 export interface LineInfoType {
-	line: string;
+	text: string;
 	color: string;
 }
