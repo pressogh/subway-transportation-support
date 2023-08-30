@@ -1,8 +1,9 @@
-interface AvailableStationProps {
-	station: string;
-}
+'use client';
+import useNearStation from '@/@hooks/useNearStation';
 
-const AvailableStation = ({ station }: AvailableStationProps) => {
+const AvailableStation = () => {
+	const nearStation = useNearStation();
+
 	return (
 		<div>
 			<div className={`text-xl font-light`}>
@@ -10,7 +11,7 @@ const AvailableStation = ({ station }: AvailableStationProps) => {
 			</div>
 			<div className={`text-xl font-light`}>
 				<span className={`mr-2 text-2xl font-normal text-[#3681CB]`}>
-					{station}
+					{nearStation?.stationInfo.station}
 				</span>
 				입니다.
 			</div>

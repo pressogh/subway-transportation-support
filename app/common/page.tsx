@@ -10,7 +10,7 @@ const Page = () => {
 				<Map />
 			</div>
 
-			<AvailableStation station={'인천대입구'} />
+			<AvailableStation />
 
 			<div>
 				<LineTagGrid />
