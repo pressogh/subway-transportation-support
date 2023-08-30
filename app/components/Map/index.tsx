@@ -90,16 +90,14 @@ const Index = () => {
 		}
 	}, [coor, track]);
 
+	// 가장 가까운 지하철 역으로 가는 도보 경로 표시
 	useEffect(() => {
 		if (nearStation && mapRef.current) {
-			// add coordinates to map
-			// polyline 말고 그냥 점으로
-
 			routeRef.current?.setMap(null);
 
 			routeRef.current = new window.naver.maps.Polyline({
 				map: mapRef.current,
-				path: nearStation,
+				path: nearStation.route,
 				strokeWeight: 8,
 				strokeColor: '#0072F5',
 				strokeOpacity: 1,
